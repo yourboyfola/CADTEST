@@ -72,24 +72,34 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 STAGE1_GDRIVE_ID = "1wksEgR9bfUFC0C7tcVuO8gfnD6VKKbNK"
 STAGE2_GDRIVE_ID = "1HBC-lm7fnZ2MNE7V1glhfD3BeBJPG3Ll"
 
-
 def download_from_gdrive(file_id, dest_path):
     import requests
-    if os.path.exists(dest_path):
-        return
+    if os.path.exists(dest_path) and os.path.getsize(dest_path) > 1000000:
+        return  # Already downloaded and looks valid
+    
     session = requests.Session()
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
-    response = session.get(url, stream=True)
-    token = None
-    for key, value in response.cookies.items():
-        if key.startswith("download_warning"):
-            token = value
-    if token:
-        response = session.get(url, params={"confirm": token, "id": file_id}, stream=True)
+    
+    # Use the export download URL with confirmation bypass
+    url = "https://drive.usercontent.google.com/download"
+    params = {
+        "id": file_id,
+        "export": "download",
+        "authuser": "0",
+        "confirm": "t"
+    }
+    
+    response = session.get(url, params=params, stream=True)
+    
+    total = 0
     with open(dest_path, "wb") as f:
-        for chunk in response.iter_content(32768):
+        for chunk in response.iter_content(65536):
             if chunk:
                 f.write(chunk)
+                total += len(chunk)
+    
+    if total < 1000000:  # Less than 1MB means download failed
+        os.remove(dest_path)
+        raise ValueError(f"Download failed for file_id={file_id}, got {total} bytes only")
 
 
 @st.cache_resource
