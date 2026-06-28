@@ -1,8 +1,8 @@
-streamlit==1.32.0
-tensorflow==2.16.1
-pydicom==2.4.4
+streamlit
+tensorflow-cpu==2.15.0
+pydicom
 opencv-python-headless
-numpy==1.26.4
-matplotlib==3.8.3
-Pillow==10.2.0
-requests==2.31.0
+numpy
+matplotlib
+Pillow
+requests
