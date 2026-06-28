@@ -1,8 +1,10 @@
 streamlit
-tensorflow-cpu==2.15.0
 pydicom
 opencv-python-headless
 numpy
 matplotlib
 Pillow
 requests
+keras==2.15.0
+tensorflow-cpu==2.15.0
+protobuf==3.20.3
