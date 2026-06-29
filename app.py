@@ -548,7 +548,7 @@ st.markdown("""
       <div class="nodac-fullname">Nodule Detection and Classification System</div>
     </div>
     <div class="nodac-byline">
-      <div class="nodac-author">DA-SILVA Anthony Oluwafemi &nbsp;·&nbsp; 190410008</div>
+      <div class="nodac-author">DA-SILVA Anthony Oluwapelumi &nbsp;·&nbsp; 190410008</div>
       <div class="nodac-meta">B.Sc Biomedical Engineering &nbsp;·&nbsp; Supervisor: Prof. O. Adeleye</div>
       <div class="nodac-uni">University of Lagos, Akoka</div>
     </div>
